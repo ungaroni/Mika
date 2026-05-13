@@ -41,7 +41,8 @@ export function GiftEditModal({ gift, onClose, onSave }: Props) {
         name: name.trim(),
         price: priceNum,
         image_url: imageUrl.trim(),
-        buy_link: buyLink.trim(),
+        buy_link: buyLink.trim() || null,
+        note: gift?.note ?? null,
         claimed_by: gift?.claimed_by ?? null,
       });
     } catch (err) {
