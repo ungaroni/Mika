@@ -19,9 +19,9 @@ export const SEED_GIFTS: Omit<Gift, 'id' | 'created_at'>[] = [
   },
   {
     name: 'מגדל למידה מתקפל מעץ',
-    price: 424,
-    image_url: 'https://hilisplay.com/cdn/shop/files/F3A2C6BD-8F3E-4B8D-923C-0640297710FA.jpg',
-    buy_link: 'https://hilisplay.com/products/%d7%9e%d7%92%d7%93%d7%9c-%d7%9c%d7%9e%d7%99%d7%93%d7%94-%d7%9e%d7%aa%d7%a7%d7%a4%d7%9c-%d7%9e%d7%a2%d7%a5',
+    price: 600,
+    image_url: 'https://static.wixstatic.com/media/d4dcae_3a8c0e2d2df245b784a0324c7bb9b0b0~mv2.jpeg/v1/fill/w_630,h_840,al_c,q_85,usm_0.66_1.00_0.01,enc_avif,quality_auto/d4dcae_3a8c0e2d2df245b784a0324c7bb9b0b0~mv2.jpeg',
+    buy_link: 'https://www.childhood.co.il/product-page/%D7%9E%D7%92%D7%93%D7%9C-%D7%9C%D7%9E%D7%99%D7%93%D7%94-%D7%9E%D7%AA%D7%A7%D7%A4%D7%9C-%D7%A6%D7%99%D7%A4%D7%95%D7%99-%D7%A4%D7%95%D7%A8%D7%9E%D7%99%D7%99%D7%A7%D7%94-%D7%A6%D7%91%D7%A2-%D7%A2%D7%A5',
     note: null,
     claimed_by: null,
   },

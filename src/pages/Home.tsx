@@ -1,20 +1,22 @@
-import { useEffect, useState } from 'react';
+import { useCallback, useEffect, useState } from 'react';
 import { Hero } from '../components/Hero';
 import { GiftCard } from '../components/GiftCard';
 import { ClaimModal } from '../components/ClaimModal';
+import { ClaimConfetti } from '../components/ClaimConfetti';
 import {
   claimGift,
-  isSupabaseConfigured,
   listGifts,
   releaseGift,
   subscribeToGifts,
 } from '../lib/db';
+import { sendClaimNotification } from '../lib/notify';
 import type { Gift } from '../types';
 
 export function Home() {
   const [gifts, setGifts] = useState<Gift[]>([]);
   const [loading, setLoading] = useState(true);
   const [claimingGift, setClaimingGift] = useState<Gift | null>(null);
+  const [showConfetti, setShowConfetti] = useState(false);
   const [error, setError] = useState<string | null>(null);
 
   async function refresh() {
@@ -38,9 +40,14 @@ export function Home() {
   async function handleConfirm(name: string) {
     if (!claimingGift) return;
     await claimGift(claimingGift.id, name);
+    // Send email notification (fire-and-forget)
+    sendClaimNotification(claimingGift.name, name).catch(() => {});
     setClaimingGift(null);
+    setShowConfetti(true);
     await refresh();
   }
+
+  const handleConfettiDone = useCallback(() => setShowConfetti(false), []);
 
   async function handleRelease(gift: Gift) {
     if (!confirm(`לשחרר את "${gift.name}"?`)) return;
@@ -59,12 +66,6 @@ export function Home() {
       <Hero />
 
       <section className="max-w-6xl mx-auto px-4 sm:px-6 pb-24">
-        {!isSupabaseConfigured && (
-          <div className="mb-8 mx-auto max-w-2xl bg-amber-50/80 border border-amber-200/60 text-amber-800 text-xs rounded-2xl px-4 py-2.5 text-center backdrop-blur-sm">
-            מצב הדגמה מקומי · עדכוני המתנות נשמרים בדפדפן זה בלבד
-          </div>
-        )}
-
         {!loading && gifts.length > 0 && (
           <div className="text-center mb-10">
             <h2 className="text-xl sm:text-2xl font-bold text-stone-800 mb-2">
@@ -130,6 +131,8 @@ export function Home() {
           onConfirm={handleConfirm}
         />
       )}
+
+      {showConfetti && <ClaimConfetti onDone={handleConfettiDone} />}
     </main>
   );
 }

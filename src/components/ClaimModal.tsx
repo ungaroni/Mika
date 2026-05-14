@@ -50,11 +50,11 @@ export function ClaimModal({ gift, onClose, onConfirm }: Props) {
       >
         <div className="text-center mb-5">
           <div className="text-4xl mb-2">🎁</div>
-          <h2 className="text-2xl font-bold text-stone-900">לאשר רכישה</h2>
+          <h2 className="text-2xl font-bold text-stone-900">בחרתי מתנה!</h2>
           <p className="text-stone-400 mt-2 text-sm leading-relaxed">
-            בחרת לקנות את <span className="font-semibold text-stone-700">{gift.name}</span>
+            בחרת להביא <span className="font-semibold text-stone-700">{gift.name}</span>
             <br />
-            נשמח להוסיף את שמך כדי למנוע כפילויות
+            רשמו את השם כדי שנדע מי מביא 🎉
           </p>
         </div>
 
