@@ -1,11 +1,12 @@
 import { useCallback, useEffect, useRef, useState } from 'react';
 
+const base = import.meta.env.BASE_URL;
 const MIKA_PHOTOS = [
-  '/mika-1.jpg',
-  '/mika-2.jpg',
-  '/mika-3.jpg',
-  '/mika-4.jpg',
-  '/mika-5.jpg',
+  `${base}mika-1.jpg`,
+  `${base}mika-2.jpg`,
+  `${base}mika-3.jpg`,
+  `${base}mika-4.jpg`,
+  `${base}mika-5.jpg`,
 ];
 
 const CONFETTI_COLORS = [
