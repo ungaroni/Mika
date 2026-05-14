@@ -9,7 +9,6 @@ import {
   releaseGift,
   subscribeToGifts,
 } from '../lib/db';
-import { sendClaimNotification } from '../lib/notify';
 import type { Gift } from '../types';
 
 export function Home() {
@@ -40,8 +39,6 @@ export function Home() {
   async function handleConfirm(name: string) {
     if (!claimingGift) return;
     await claimGift(claimingGift.id, name);
-    // Send email notification (fire-and-forget)
-    sendClaimNotification(claimingGift.name, name).catch(() => {});
     setClaimingGift(null);
     setShowConfetti(true);
     await refresh();
