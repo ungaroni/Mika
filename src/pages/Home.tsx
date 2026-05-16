@@ -6,7 +6,6 @@ import { ClaimConfetti } from '../components/ClaimConfetti';
 import {
   claimGift,
   listGifts,
-  releaseGift,
   subscribeToGifts,
 } from '../lib/db';
 import type { Gift } from '../types';
@@ -45,16 +44,6 @@ export function Home() {
   }
 
   const handleConfettiDone = useCallback(() => setShowConfetti(false), []);
-
-  async function handleRelease(gift: Gift) {
-    if (!confirm(`לשחרר את "${gift.name}"?`)) return;
-    try {
-      await releaseGift(gift.id);
-      await refresh();
-    } catch (err) {
-      alert(err instanceof Error ? err.message : 'שגיאה');
-    }
-  }
 
   const claimedCount = gifts.filter((g) => g.claimed_by).length;
 
@@ -110,7 +99,6 @@ export function Home() {
                 gift={gift}
                 index={i}
                 onClaim={(g) => setClaimingGift(g)}
-                onRelease={handleRelease}
               />
             ))}
           </div>

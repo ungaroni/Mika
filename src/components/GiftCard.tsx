@@ -5,15 +5,18 @@ type Props = {
   gift: Gift;
   index: number;
   onClaim: (gift: Gift) => void;
-  onRelease: (gift: Gift) => void;
 };
 
-export function GiftCard({ gift, index, onClaim, onRelease }: Props) {
+export function GiftCard({ gift, index, onClaim }: Props) {
   const claimed = Boolean(gift.claimed_by);
 
   return (
     <article
-      className="group bg-white rounded-3xl shadow-soft overflow-hidden flex flex-col transition-all duration-300 hover:shadow-card hover:-translate-y-1 animate-fade-in"
+      className={`group rounded-3xl shadow-soft overflow-hidden flex flex-col transition-all duration-300 animate-fade-in ${
+        claimed
+          ? 'bg-stone-100 opacity-60'
+          : 'bg-white hover:shadow-card hover:-translate-y-1'
+      }`}
       style={{ animationDelay: `${index * 60}ms` }}
     >
       <div className="relative overflow-hidden">
@@ -26,11 +29,11 @@ export function GiftCard({ gift, index, onClaim, onRelease }: Props) {
         <span
           className={`absolute top-3 left-3 px-3 py-1.5 rounded-full text-xs font-semibold backdrop-blur-md shadow-sm ${
             claimed
-              ? 'bg-rose-100/95 text-rose-500 border border-rose-200/50'
+              ? 'bg-stone-200/95 text-stone-500 border border-stone-300/50'
               : 'bg-white/90 text-sage-500 border border-sage-100/50'
           }`}
         >
-          {claimed ? `נתפס ע״י ${gift.claimed_by}` : 'פנוי ✨'}
+          {claimed ? 'מישהו כבר לוקח ✓' : 'פנוי ✨'}
         </span>
       </div>
 
@@ -68,14 +71,8 @@ export function GiftCard({ gift, index, onClaim, onRelease }: Props) {
 
         <div className="mt-auto pt-3 border-t border-stone-50">
           {claimed ? (
-            <div className="flex items-center justify-between">
-              <span className="text-sm text-rose-400">💝 תודה!</span>
-              <button
-                onClick={() => onRelease(gift)}
-                className="text-xs text-stone-300 hover:text-rose-500 transition underline-offset-2 hover:underline"
-              >
-                ביטול
-              </button>
+            <div className="flex items-center justify-center">
+              <span className="text-sm text-stone-400">נתפס ✓</span>
             </div>
           ) : (
             <button
