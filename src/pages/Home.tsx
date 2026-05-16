@@ -6,8 +6,10 @@ import { ClaimConfetti } from '../components/ClaimConfetti';
 import {
   claimGift,
   listGifts,
+  releaseGift,
   subscribeToGifts,
 } from '../lib/db';
+import { addClaim, removeClaim, isMyClaim } from '../lib/myClaims';
 import type { Gift } from '../types';
 
 export function Home() {
@@ -38,9 +40,21 @@ export function Home() {
   async function handleConfirm(name: string) {
     if (!claimingGift) return;
     await claimGift(claimingGift.id, name);
+    addClaim(claimingGift.id);
     setClaimingGift(null);
     setShowConfetti(true);
     await refresh();
+  }
+
+  async function handleRelease(gift: Gift) {
+    if (!confirm('בטוח שאת/ה רוצה לבטל?')) return;
+    try {
+      await releaseGift(gift.id);
+      removeClaim(gift.id);
+      await refresh();
+    } catch (err) {
+      alert(err instanceof Error ? err.message : 'שגיאה');
+    }
   }
 
   const handleConfettiDone = useCallback(() => setShowConfetti(false), []);
@@ -98,7 +112,9 @@ export function Home() {
                 key={gift.id}
                 gift={gift}
                 index={i}
+                isMine={isMyClaim(gift.id)}
                 onClaim={(g) => setClaimingGift(g)}
+                onRelease={handleRelease}
               />
             ))}
           </div>

@@ -4,17 +4,21 @@ import { GiftImage } from './GiftImage';
 type Props = {
   gift: Gift;
   index: number;
+  isMine: boolean;
   onClaim: (gift: Gift) => void;
+  onRelease: (gift: Gift) => void;
 };
 
-export function GiftCard({ gift, index, onClaim }: Props) {
+export function GiftCard({ gift, index, isMine, onClaim, onRelease }: Props) {
   const claimed = Boolean(gift.claimed_by);
 
   return (
     <article
       className={`group rounded-3xl shadow-soft overflow-hidden flex flex-col transition-all duration-300 animate-fade-in ${
         claimed
-          ? 'bg-stone-100 opacity-60'
+          ? isMine
+            ? 'bg-peach-50/50 opacity-90'
+            : 'bg-stone-100 opacity-60'
           : 'bg-white hover:shadow-card hover:-translate-y-1'
       }`}
       style={{ animationDelay: `${index * 60}ms` }}
@@ -24,16 +28,18 @@ export function GiftCard({ gift, index, onClaim }: Props) {
           <GiftImage src={gift.image_url} alt={gift.name} />
         </div>
         {claimed && (
-          <div className="absolute inset-0 bg-stone-900/10" />
+          <div className={`absolute inset-0 ${isMine ? 'bg-peach-500/5' : 'bg-stone-900/10'}`} />
         )}
         <span
           className={`absolute top-3 left-3 px-3 py-1.5 rounded-full text-xs font-semibold backdrop-blur-md shadow-sm ${
             claimed
-              ? 'bg-stone-200/95 text-stone-500 border border-stone-300/50'
+              ? isMine
+                ? 'bg-peach-100/95 text-peach-600 border border-peach-200/50'
+                : 'bg-stone-200/95 text-stone-500 border border-stone-300/50'
               : 'bg-white/90 text-sage-500 border border-sage-100/50'
           }`}
         >
-          {claimed ? 'מישהו כבר לוקח ✓' : 'פנוי ✨'}
+          {claimed ? (isMine ? 'בחרת את זה ✓' : 'מישהו כבר לוקח ✓') : 'פנוי ✨'}
         </span>
       </div>
 
@@ -71,9 +77,18 @@ export function GiftCard({ gift, index, onClaim }: Props) {
 
         <div className="mt-auto pt-3 border-t border-stone-50">
           {claimed ? (
-            <div className="flex items-center justify-center">
-              <span className="text-sm text-stone-400">נתפס ✓</span>
-            </div>
+            isMine ? (
+              <button
+                onClick={() => onRelease(gift)}
+                className="w-full text-stone-400 hover:text-rose-500 text-sm py-2.5 rounded-2xl transition hover:bg-rose-50"
+              >
+                ביטול בחירה
+              </button>
+            ) : (
+              <div className="flex items-center justify-center">
+                <span className="text-sm text-stone-400">נתפס ✓</span>
+              </div>
+            )
           ) : (
             <button
               onClick={() => onClaim(gift)}
