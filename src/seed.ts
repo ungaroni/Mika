@@ -92,8 +92,8 @@ export const SEED_GIFTS: Omit<Gift, 'id' | 'created_at'>[] = [
   {
     name: 'איפה מר אריה?',
     price: 39,
-    image_url: 'https://www.matarbooks.co.il/3d7b0f2b-0a6e-4d92-a819-24da82103154.jpg',
-    buy_link: 'https://www.matarbooks.co.il/%D7%9E%D7%95%D7%A6%D7%A8%D7%99%D7%9D/%D7%90%D7%99%D7%A4%D7%94-%D7%9E%D7%A8-%D7%90%D7%A8%D7%99%D7%94',
+    image_url: 'https://www.steimatzky.co.il/pub/media/catalog/product/cache/07c27feb0b57ff821c444b41a5827060/0/1/013621265-1635787983318287.jpg',
+    buy_link: 'https://www.steimatzky.co.il/013621265',
     note: null,
     claimed_by: null,
   },
