@@ -97,4 +97,12 @@ export const SEED_GIFTS: Omit<Gift, 'id' | 'created_at'>[] = [
     note: null,
     claimed_by: null,
   },
+  {
+    name: 'מגדל ספירלה BIO QUERCETTI',
+    price: 115,
+    image_url: 'https://d3m9l0v76dty0.cloudfront.net/system/photos/8869432/large/ee591cfca21f8f61f1645da69fc9f617.jpg',
+    buy_link: 'https://www.mamo-israel.co.il/items/4665650',
+    note: null,
+    claimed_by: null,
+  },
 ];
