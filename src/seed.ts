@@ -2,10 +2,10 @@ import type { Gift } from './types';
 
 export const SEED_GIFTS: Omit<Gift, 'id' | 'created_at'>[] = [
   {
-    name: 'אוהל טיפי גדול לילדים',
-    price: 350,
-    image_url: 'https://tweezers.co.il/wp-content/uploads/kf-Sbd654ae8d9184d5ca1bf47bf0757fdees.webp',
-    buy_link: 'https://tweezers.co.il/product/%D7%90%D7%95%D7%94%D7%9C-%D7%98%D7%99%D7%A4%D7%99-%D7%92%D7%93%D7%95%D7%9C-%D7%9C%D7%99%D7%9C%D7%93%D7%99%D7%9D/',
+    name: 'אוהל – מנומר',
+    price: 249,
+    image_url: 'https://bliss-il.co.il/wp-content/uploads/2026/04/%D7%90%D7%95%D7%94%D7%9C-%D7%A0%D7%9E%D7%A8.png',
+    buy_link: 'https://bliss-il.co.il/product/%D7%90%D7%95%D7%94%D7%9C-%D7%9E%D7%A0%D7%95%D7%9E%D7%A8/',
     note: null,
     claimed_by: null,
   },
@@ -27,7 +27,7 @@ export const SEED_GIFTS: Omit<Gift, 'id' | 'created_at'>[] = [
   },
   {
     name: 'דוכן גלידה מעץ Melissa & Doug',
-    price: 209,
+    price: 188,
     image_url: 'https://yashas-wood.co.il/wp-content/uploads/2025/02/9286.webp',
     buy_link: 'https://yashas-wood.co.il/product/9286',
     note: null,
